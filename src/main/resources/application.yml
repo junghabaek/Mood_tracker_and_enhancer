@@ -3,3 +3,8 @@ server:
     encoding:
       force-response: true
 
+#application-oauth.yml 추가
+spring:
+  profiles:
+    include: oauth
+

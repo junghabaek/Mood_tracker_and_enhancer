@@ -2,6 +2,7 @@ package com.moodTracker.domain.user_mood;
 
 import com.moodTracker.domain.BaseTimeEntity;
 import com.moodTracker.domain.users.Users;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,4 +23,10 @@ public class Mood extends BaseTimeEntity {
 
     @Column(nullable = false)
     private int mood_level;
+
+    @Builder
+    public Mood(Users users, int mood_level){
+        this.users=users;
+        this.mood_level=mood_level;
+    }
 }
