@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/")
-    public String hello(Model model){
-        //model.addAttribute("name", "Jungha");
+    public String hello(){
         return "index";
     }
 }
