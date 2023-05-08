@@ -29,4 +29,6 @@ public class Mood extends BaseTimeEntity {
         this.users=users;
         this.mood_level=mood_level;
     }
+
+
 }

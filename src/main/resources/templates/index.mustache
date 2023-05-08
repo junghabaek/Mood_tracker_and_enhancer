@@ -25,7 +25,7 @@ body{
     <h1 class="display-5 fw-bold">Welcome to Mood Tracker</h1>
 <!--    <h1 class="display-5 fw-bold">and Enhancer</h1>-->
     <p></p>
-    <div class="col-lg-3 mx-auto">
+    <div class="col-lg-4 mx-auto">
         <p class="lead mb-4">Mood tracker and Enhancer can help you to keep track of your daily mood so that they can be used as future information to even lead to enhance your mood.</p>
         <p class="lead mb-3">Please sign in with your favorite platform.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -39,6 +39,7 @@ body{
                     Hi {{userName}}, kindly check your mood for yourself.
                     </div>
                     <button onclick="window.location.href='/moodtracker';" type="button" class="btn btn-success btn-lg px-4">Track your Mood</button>
+                    <button onclick="window.location.href='/moodhistory';" type = "button" class="btn btn-outline-success btn-lg px-4">Mood history</button>
                     <button onclick="window.location.href='/logout';" type="button" class="btn btn-secondary btn-lg px-4">Logout</button>
                 </div>
             {{/userName}}

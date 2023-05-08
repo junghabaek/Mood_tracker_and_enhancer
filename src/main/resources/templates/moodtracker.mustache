@@ -1,3 +1,43 @@
 {{>layout/header}}
 <h1>Welcome to moodtracker</h1>
+<h3>First, Kindly choose the start level</h3>
+{{#pastWeekLevel}}
+    <h3>Your average mood level is {{pastWeekLevel}}</h3>
+{{/pastWeekLevel}}
+{{^pastWeekLevel}}
+    <h3>You have not checked your mood last week!</h3>
+{{/pastWeekLevel}}
+<!--<form method="GET" action="/selectedLevel_">-->
+<!--    <div class="dropdown">-->
+<!--        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            Choose the level-->
+<!--        </button>-->
+<!--        <ul class="dropdown-menu">-->
+<!--            <li><a class="dropdown-item" href="#" value="0">Level 0</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" value="1">Level 1</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" value="2">Level 2</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" value="3">Level 3</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" value="4">Level 4</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" value="5">Level 5</a></li>-->
+<!--            <li><a class="dropdown-item" href="#" value="6">Level 6</a></li>-->
+
+<!--        </ul>-->
+<!--    </div>-->
+<!--    <button class="btn btn-primary" type="submit">Submit</button>-->
+<!--</form>-->
+
+<form method="GET" action="/selectedLevel">
+    <div class="form-group">
+        <label for="dropdown">Select an option:</label>
+        <select class="form-control" id="dropdown" name="selected_option">
+            <option value="1">Level 1</option>
+            <option value="2">Level 2</option>
+            <option value="3">Level 3</option>
+            <option value="4">Level 4</option>
+            <option value="5">Level 5</option>
+            <option value="6">Level 6</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 {{>layout/footer}}
