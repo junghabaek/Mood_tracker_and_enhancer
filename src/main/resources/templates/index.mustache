@@ -38,9 +38,13 @@ body{
                     <div class="alert alert-success gap-3" role="alert">
                     Hi {{userName}}, kindly check your mood for yourself.
                     </div>
-                    <button onclick="window.location.href='/moodtracker';" type="button" class="btn btn-success btn-lg px-4">Track your Mood</button>
-                    <button onclick="window.location.href='/moodhistory';" type = "button" class="btn btn-outline-success btn-lg px-4">Mood history</button>
-                    <button onclick="window.location.href='/logout';" type="button" class="btn btn-secondary btn-lg px-4">Logout</button>
+                    <div class="gap-3" >
+                        <button onclick="window.location.href='/moodtracker';" type="button" class="btn btn-success btn-lg px-4">Track your Mood</button>
+                        <button onclick="window.location.href='/moodhistory';" type = "button" class="btn btn-outline-success btn-lg px-4">Mood history</button>
+                        <button onclick="window.location.href='/logout';" type="button" class="btn btn-secondary btn-lg px-4">Logout</button>
+                    </div>
+                    <p></p>
+                    <button onclick="window.location.href='/taskManager';" type="button" class ="btn btn-outline-warning">Task Manager</button>
                 </div>
             {{/userName}}
         </div>

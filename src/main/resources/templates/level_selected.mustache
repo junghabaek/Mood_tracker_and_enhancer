@@ -1,5 +1,21 @@
 {{>layout/header}}
 
-{{selected_level}}
+<div class = "text-center">
+    <h3>This is level {{selected_level}}</h3>
+    <form>
+        <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+            {{#taskList}}
+
+                <input type="checkbox" class="btn-check" id="btncheck{{task_id}}" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btncheck{{task_id}}">{{task_name}}</label>
+
+            {{/taskList}}
+
+        </div>
+    </form>
+    <p></p>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</div>
 
 {{>layout/footer}}

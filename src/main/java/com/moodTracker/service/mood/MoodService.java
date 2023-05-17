@@ -5,6 +5,7 @@ import com.moodTracker.domain.user_mood.MoodRepository;
 import com.moodTracker.domain.users.UserRepository;
 import com.moodTracker.domain.users.Users;
 import com.moodTracker.web.dto.MoodListResponseDto;
+import com.moodTracker.web.vo.Mood_vo_ForAverageMoodLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +23,14 @@ public class MoodService {
 //        moodRepository.findAllById().stream()
 //                .map(MoodListResponseDto::new)
 //                .collect(Collectors.toList());
-    public int getAverageMoodLevel (){
-        Long user_id = (Long) httpSession.getAttribute("user_id");
+    public int getAverageMoodLevel (Long user_id){
         System.out.println(user_id);
         Users users = userRepository.findById(user_id)
                 .orElseThrow(()-> new IllegalArgumentException("해당 id를 가진 유저를 찾을 수 없습니다"));
 
-        List<MoodListResponseDto> moodListResponseDtoList =
+        List<Mood_vo_ForAverageMoodLevel> moodVoForAverageMoodLevels=
                 moodRepository.findAllByUsers(users).stream()
-                .map(MoodListResponseDto::new)
+                .map(Mood_vo_ForAverageMoodLevel::new)
                 .collect(Collectors.toList());
 
         // 사실 직접 유저를 이용해서 List<Mood>를 받아와서 하나하나 꺼내서 쓸 수 있다.
@@ -39,13 +39,13 @@ public class MoodService {
 
         int total =0;
 
-        for (MoodListResponseDto dto : moodListResponseDtoList){
-            total+= dto.getMood_level();
+        for (Mood_vo_ForAverageMoodLevel vo : moodVoForAverageMoodLevels){
+            total+= vo.getMood_level();
         }
-        if (moodListResponseDtoList.size()==0){
+        if (moodVoForAverageMoodLevels.size()==0){
             return 0;
         } else {
-            return (int) (total / moodListResponseDtoList.size());
+            return (int) (total / moodVoForAverageMoodLevels.size());
         }
     }
 }

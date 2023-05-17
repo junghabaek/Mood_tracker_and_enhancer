@@ -6,23 +6,24 @@ server:
 #application-oauth.yml 추가
 spring:
   profiles:
-    include: oauth
+    include: oauth, db
 
 #h2 database
-  h2:
-    console:
-      enabled: true
+#  h2:
+#    console:
+#      enabled: true
+
 
 #jpa
   jpa:
     showSql: true
 
     hibernate:
-      ddlAuto: create-drop
+      ddlAuto: update
 
-  datasource:
-    hikari:
-      jdbc-url: jdbc:h2:mem://localhost/~/testdb;MODE=MYSQL
-
-    username: sa
-    password: password
+#  datasource:
+#    hikari:
+#      jdbc-url: jdbc:h2:mem://localhost/~/testdb;MODE=MYSQL
+#
+#    username: sa
+#    password: password

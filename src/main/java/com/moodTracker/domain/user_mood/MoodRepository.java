@@ -1,7 +1,6 @@
 package com.moodTracker.domain.user_mood;
 
 import com.moodTracker.domain.users.Users;
-import com.moodTracker.web.dto.MoodListResponseDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

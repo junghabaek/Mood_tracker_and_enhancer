@@ -43,3 +43,4 @@ bin/
 .DS_Store
 
 application-oauth.yml
+application-db.yml

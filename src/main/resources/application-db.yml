@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/mood_tracker
+    username: junghabaek
+    password: 614614

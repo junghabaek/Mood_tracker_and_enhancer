@@ -1,0 +1,33 @@
+{{>layout/header}}
+
+<div class="text-center">
+
+<h1>Update or Delete Task</h1>
+
+    <div class="row justify-content-center">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="task_name">Task</label>
+                <input type="text" class="form-control" id="task_name" value="{{task.task_name}}">
+            </div>
+            <div class="form-group">
+                <label for="task_level" class="form-label">Task level</label>
+                <select name="task_level" id="task_level" class="form-select">
+                    <option selected value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
+                    <option value="5">Level 5</option>
+                    <option value="6">Level 6</option>
+                </select>
+            </div>
+        </form>
+        <a href="/taskManager" role="button" class="btn btn-secondary">Cancel</a>
+        <button type="button" class="btn btn-primary" id="btn-update">Update</button>
+        <button type="button" class="btn btn-danger" id="btn-delete">Delete</button>
+    </div>
+    </div>
+</div>
+<script src="/js/app/update_delete.js"></script>
+{{>layout/footer}}
