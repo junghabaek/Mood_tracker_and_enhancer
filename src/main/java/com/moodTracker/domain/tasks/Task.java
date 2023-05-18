@@ -1,5 +1,6 @@
 package com.moodTracker.domain.tasks;
 
+import com.moodTracker.domain.BaseTimeEntity;
 import com.moodTracker.domain.users.Users;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name="task")
-public class Task {
+public class Task extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "non_fk_task_id")
