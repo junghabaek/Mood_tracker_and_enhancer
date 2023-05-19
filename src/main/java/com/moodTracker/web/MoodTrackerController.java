@@ -3,6 +3,9 @@ package com.moodTracker.web;
 import com.moodTracker.domain.finishedTasks.FinishedTasks;
 import com.moodTracker.domain.tasks.Task;
 import com.moodTracker.domain.tasks.TaskRepository;
+import com.moodTracker.domain.user_mood.Mood;
+import com.moodTracker.domain.user_mood.MoodRepository;
+import com.moodTracker.domain.users.UserRepository;
 import com.moodTracker.domain.users.Users;
 import com.moodTracker.service.finishedTask.FinishedTasksService;
 import com.moodTracker.service.mood.MoodService;
@@ -23,7 +26,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class MoodTrackerController {
-    private final MoodService moodService;
+    private final UserRepository userRepository;
+    private final MoodRepository moodRepository;
     private final TaskService taskService;
     private final TaskRepository taskRepository;
     private final FinishedTasksService finishedTasksService;
@@ -38,8 +42,11 @@ public class MoodTrackerController {
 //        level.add(Integer.parseInt(selected_level));
         List<Task> taskList = taskRepository.findAllByTaskLevel(Integer.parseInt(selected_level));
 
+        List<String> taskListString;
+
         for (Task task : taskList){
             System.out.println(task.getTask_name());
+
         }
 
         model.addAttribute("taskList", taskList);
@@ -47,38 +54,68 @@ public class MoodTrackerController {
     }
 
     @GetMapping("/level_selected")
-    public String level_selected(@RequestParam("task_list") List<String> tasks,
+    public String level_selected(@RequestParam("task_list") String tasks,
                                        @RequestParam("selected_level") int selected_level, Model model){
 
         Long user_id = (Long) httpSession.getAttribute("user_id");
+        Users user = userRepository.findById(user_id).orElseThrow(()->new IllegalArgumentException("해당 id를 가진 유저가 없습니다"));
+        System.out.println(tasks);
 
-        for(String finishedTask_id : tasks){
-            System.out.println(finishedTask_id);
-//여기에 오늘 한 일들을 추가해주는 sql이 필요함
-//            finishedTasksService.update(user_id, Long.parseLong(finishedTask_id));
+        tasks = tasks.substring(1, tasks.length()-1);
+
+        List<String> taskList = new ArrayList<>();
+        String[] elements = tasks.split("\",\"");
+
+        for(String element : elements){
+            String trimmedElement = element.replaceAll("\"","");
+            taskList.add(trimmedElement);
         }
-//        System.out.println(selected_level);
-        // 점수든 갯수든간에 레벨이 결정되면, selected_level에다가 넣어줘서 selectedLevel에 보내줘야함.
-        // 어디로 보낼지 정하는 알고리즘이 필요하고 -- 갯수제로 하자
-        // 오늘 한 것을 토대로 Done 버튼이 필요함.
 
-        int nextLevel = ReturnSelectedLevel(tasks.size(), selected_level);
+        for(String finishedTask_id : taskList){
+            System.out.println(finishedTask_id);
+            finishedTasksService.update(user_id, Long.parseLong(finishedTask_id));
+            //업데이트까지 잘 완료되는것을 확인했습니다.
+            //이제는 종료되는 로직을 짜야 할 차례입니다.
+            //바로 뒷줄에서 쩌야한다.
+        }
 
-//        System.out.println(nextLevel);
+        if (taskList.size()==2 || (selected_level==1 && taskList.size()<2)
+        || (selected_level==6 && taskList.size()>2)){
+            Mood mood = new Mood(user, selected_level);
+            moodRepository.save(mood);
+            model.addAttribute("userName", user.getName());
+            return "index";
+        }
+        // 태스크를 몇개 했는지에 따라서 레벨이 변동되는 로직입니다.
+        // 어떤 레벨에 태스크가 정확히 2개를 실행하게 되면 종료가 되게 됩니다.
+        // 그때까지의 태스크들은 모두 db에 저장이 되게 됩니다.
+        // 종료조건은 세가지입니다.
+        // 1. 레벨 1에서 1개 이하의 일을 수행할 수 있었다. -- mood level = 1
+        // 2. 모든 레벨에서 정확히 2개의 일을 수행할 수 있었다 -- mood level = selected_level
+        // 3. 레벨 6에서 3개 이상의 일을 수행할 수 있었다 -- mood level =6
+
+
+        //아래 로직은 한 레벨에서 2개를 선택했을 때는 필요 없는 것들이다.
+
+        int nextLevel = returnSelectedLevel(taskList.size(), selected_level);
+
+        System.out.println(nextLevel);
 
         model.addAttribute("selected_level", nextLevel);
-        //여기에 로직이 들어가야함
 
-        List<Task> taskList = taskRepository.findAllByTaskLevel(nextLevel);
+        List<Task> taskList_from_db = taskRepository.findAllByTaskLevel(nextLevel);
 
-        model.addAttribute("taskList", taskList);
-
-
+        model.addAttribute("taskList", taskList_from_db);
+//
+//
         return "level_selected";
 
     }
 
-    public int ReturnSelectedLevel(int numberOfSelection, int currentLevel){
+
+
+
+    public int returnSelectedLevel(int numberOfSelection, int currentLevel){
         int nextLevel = (numberOfSelection-2)+currentLevel;
 
         if (nextLevel<1){
@@ -90,5 +127,7 @@ public class MoodTrackerController {
         return nextLevel;
 
     }
+
+
 
 }

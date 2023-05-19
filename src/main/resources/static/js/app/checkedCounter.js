@@ -13,9 +13,15 @@ function countChecked(selected_level) {
     }
   });
 
+
   // Display the count
+
+
   alert("You have completed " + checkedCount +" tasks");
 
+  if (checkedCount==2 || (selected_level==1 && checkedCount<2) || (selected_level==6 && checkedCount>2)){
+  alert("Your daily mood is tracked.");
+  }
   var jsonCheckedTasks = JSON.stringify(checkedTasks);
 
   var encodedList = encodeURIComponent(jsonCheckedTasks);
