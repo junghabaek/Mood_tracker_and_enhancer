@@ -39,7 +39,7 @@ public class MoodService {
 
         LocalDate now = LocalDate.now();
         LocalDate startDate = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate endDate = startDate.plusDays(6);
+        LocalDate endDate = startDate.plusDays(7);
         List<Mood> moodList = moodRepository.findThisWeeksMoodsByUsers(startDate, endDate, users);
 //        List<Mood> moodList = moodRepository.findThisWeeksMoodsByUsers(users.getUser_id());
 //        List<Mood> moods = moodRepository.findMoods(users);

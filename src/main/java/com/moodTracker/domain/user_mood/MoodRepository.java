@@ -5,8 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 public interface MoodRepository extends JpaRepository<Mood, Long> {
 
@@ -18,8 +21,9 @@ public interface MoodRepository extends JpaRepository<Mood, Long> {
     @Query("SELECT m FROM Mood m WHERE m.users = :users AND m.daily_mood_id IN (SELECT daily_mood_id FROM Mood WHERE created_date >= :startDate AND created_date <= :endDate)")
 
     List<Mood> findThisWeeksMoodsByUsers(
-            @Param("startDate") LocalDate startDate,
+            LocalDate startDate,
             LocalDate endDate,
             Users users
     );
+
 }
