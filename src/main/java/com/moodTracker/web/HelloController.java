@@ -45,7 +45,7 @@ public class HelloController {
         return "index";
     }
 
-    @GetMapping("/moodtracker")
+    @GetMapping("/v1/mood_tracker")
     public String moodtracker (Model model){
 
         Long user_id = (Long) httpSession.getAttribute("user_id");
@@ -55,10 +55,10 @@ public class HelloController {
         if (average_mood_level!=0){
             model.addAttribute("pastWeekLevel", average_mood_level);
         }
-        return "moodtracker";
+        return "mood_tracker";
     }
 
-    @GetMapping("/taskManager")
+    @GetMapping("/v1/task_manager")
     public String newTask(Model model){
         Long user_id = (Long) httpSession.getAttribute("user_id");
 
@@ -68,19 +68,19 @@ public class HelloController {
 
         model.addAttribute(taskResponseDtoList);
 
-        return "taskManager";
+        return "task_manager";
     }
 
-    @GetMapping("/moodhistory")
+    @GetMapping("/v1/mood_history")
     public String moodhistory(){
 
 
 
-        return "moodhistory";
+        return "mood_history";
 
     }
 
-    @GetMapping("/moodhistoryResolver")
+    @GetMapping("/v1/mood_history_resolver")
     public String moodhistoryResolver(@RequestParam("startDate")String startDate,
                                       @RequestParam("endDate") String endDate, Model model){
         Long user_id = (Long) httpSession.getAttribute("user_id");
@@ -128,7 +128,7 @@ public class HelloController {
         model.addAttribute("averageMood", averageMood);
 
 
-        return "moodhistory";
+        return "mood_history";
     }
 
 }

@@ -22,12 +22,12 @@ var main = {
     var id = path.split('/').pop();
 
     var xhr = new XMLHttpRequest();
-    xhr.open('PUT', '/updateTask/' + id, true);
+    xhr.open('PUT', '/v1/PUT/task/' + id, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     xhr.onload = function() {
       if (xhr.status === 200) {
         alert('Update successful');
-        window.location.href = '/taskManager';
+        window.location.href = '/v1/task_manager';
       } else {
         alert('Error: ' + xhr.status);
       }
@@ -43,12 +43,12 @@ var main = {
     var id = path.split('/').pop();
 
     var xhr = new XMLHttpRequest();
-    xhr.open('DELETE', '/updateTask/' + id, true);
+    xhr.open('DELETE', '/v1/DELETE/task/' + id, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     xhr.onload = function() {
       if (xhr.status === 200) {
         alert('Task deleted');
-        window.location.href = '/taskManager';
+        window.location.href = '/v1/task_manager';
       } else {
         alert('Error: ' + xhr.status);
       }

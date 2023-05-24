@@ -1,6 +1,6 @@
 {{>layout/header}}
 <div class="text-center">
-<h1>Welcome to moodtracker</h1>
+<h1>Welcome to mood tracker</h1>
 <h3>First, Kindly choose the start level</h3>
 {{#pastWeekLevel}}
     <h3>Your average mood level this week is {{pastWeekLevel}}</h3>
@@ -10,7 +10,7 @@
 {{/pastWeekLevel}}
     <div class="row justify-content-center">
 <div class="form-group col-4">
-<form method="GET" action="/selectedLevel">
+<form method="GET" action="/v1/selected_level_resolver">
         <label for="dropdown">Select an option:</label>
         <select class="form-control" id="dropdown" name="selected_level">
             <option value="1">Level 1</option>

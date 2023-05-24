@@ -24,7 +24,7 @@ public class TaskController {
     private final HttpSession httpSession;
 
 
-    @GetMapping("/createTask")
+    @PostMapping("/v1/POST/tasks")
     public RedirectView createTask(@RequestParam("task_name") String task_name, @RequestParam("task_level") String task_level) {
 
         Long user_id = (Long) httpSession.getAttribute("user_id");
@@ -35,26 +35,27 @@ public class TaskController {
         taskService.createNewTask(taskRequestDto);
 
 //        taskService.createNewTask(users, task_name, task_level);
-        return new RedirectView("/taskManager");
+        return new RedirectView("/v1/task_manager");
     }
 
-    @GetMapping("/updateTask/{task_id}")
+    //
+    @GetMapping("/v1/task_to_modify/{task_id}")
     public String modifyTask (@PathVariable Long task_id, Model model){
         Task task = taskRepository.findById(task_id).get();
         model.addAttribute(task);
-        return "modifyTask";
+        return "modify_task";
     }
 
-    @PutMapping("/updateTask/{task_id}")
+    @PutMapping("/v1/PUT/task/{task_id}")
     public String updateTask(@PathVariable Long task_id, @RequestBody TaskRequestDto taskRequestDto){
         taskService.update(task_id, taskRequestDto);
-        return "taskManager";
+        return "task_manager";
     }
 
-    @DeleteMapping("/updateTask/{task_id}")
+    @DeleteMapping("/v1/DELETE/task/{task_id}")
     public String deleteTask(@PathVariable Long task_id){
         taskRepository.deleteById(task_id);
-        return "taskManager";
+        return "task_manager";
 
     }
 }

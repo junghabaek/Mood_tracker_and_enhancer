@@ -33,7 +33,8 @@ public class MoodTrackerController {
     private final FinishedTasksService finishedTasksService;
     private final HttpSession httpSession;
 
-    @GetMapping("/selectedLevel")
+///v1/selected_level_resolver
+    @GetMapping("/v1/selected_level_resolver")
     public String selected_level(@RequestParam("selected_level") String selected_level, Model model){
 //        System.out.println(selected_level);
 
@@ -53,7 +54,7 @@ public class MoodTrackerController {
         return "level_selected";
     }
 
-    @GetMapping("/level_selected")
+    @GetMapping("/v1/selected_tasks_resolver")
     public String level_selected(@RequestParam("task_list") String tasks,
                                        @RequestParam("selected_level") int selected_level, Model model){
 

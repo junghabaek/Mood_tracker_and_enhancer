@@ -10,7 +10,7 @@
 <h1>Task Manager</h1>
     <div class="row justify-content-center">
         <div class="col-4">
-        <form action="/createTask" method="get">
+        <form action="/v1/POST/tasks" method="POST">
             <div class="mb-3">
                 <label for="task_name" class="form-label">Task name</label>
                 <input name="task_name" type="text" class="form-control" id="task" placeholder="Please enter a new task">
@@ -50,8 +50,8 @@
                 <tbody id="tbody">
                 {{#taskResponseDtoList}}
                 <tr>
-                    <td><a href="/updateTask/{{task_id}}">{{task_id}}</td>
-                    <td><a href="/updateTask/{{task_id}}">{{task_name}}</td>
+                    <td><a href="/v1/task_to_modify/{{task_id}}">{{task_id}}</td>
+                    <td><a href="/v1/task_to_modify/{{task_id}}">{{task_name}}</td>
                     <td>{{task_level}}</td>
                 </tr>
                 {{/taskResponseDtoList}}

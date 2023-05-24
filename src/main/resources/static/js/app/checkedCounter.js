@@ -30,7 +30,7 @@ function countChecked(selected_level) {
 
   encodedList += "&selected_level=" + encodeURIComponent(selected_level);
 
-  var redirectURL = "http://localhost:8080/level_selected/?task_list=" + encodedList;
+  var redirectURL = "http://localhost:8080/v1/selected_tasks_resolver/?task_list=" + encodedList;
 
   window.location.href = redirectURL;
 
