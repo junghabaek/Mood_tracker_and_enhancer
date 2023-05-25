@@ -21,6 +21,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.hamcrest:hamcrest-library:2.2")
+    testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<Test> {

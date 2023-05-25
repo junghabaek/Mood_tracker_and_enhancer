@@ -50,6 +50,12 @@ public class HelloController {
 
         Long user_id = (Long) httpSession.getAttribute("user_id");
 
+
+        if (user_id==null){
+            model.addAttribute("pastWeekLevel", -1);
+            return "mood_tracker";
+        }
+
         int average_mood_level = moodService.getAverageMoodLevel(user_id);
 
         if (average_mood_level!=0){
@@ -60,7 +66,11 @@ public class HelloController {
 
     @GetMapping("/v1/task_manager")
     public String newTask(Model model){
+        System.out.println(httpSession.getAttribute("user_id"));
+
         Long user_id = (Long) httpSession.getAttribute("user_id");
+//        System.out.println("hasdf");
+//        System.out.println(user_id);
 
         Users users = userRepository.findById(user_id).get();
 

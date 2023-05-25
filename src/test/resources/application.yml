@@ -1,0 +1,34 @@
+#server:
+#  servlet:
+#    encoding:
+#      force-response: true
+# 위의 설정은 mustache의 값이 한글로 제대로 나오게 하게끔 하는 설정인데
+# MockMvc를 사용할 것이기 때문에 아마 필요 없을것 같다. 오류가 생길시 주석을 풀어보자?
+# 필요할것 같기도 하다... mustache가 결국 html을 만드니까 만약 한글이 사용된다면 문제가 될 수 있다.
+
+spring:
+  profiles:
+    include: db #db정보 추가
+
+  jpa:
+    showSql: true
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  session:
+    store-type: jdbc
+
+# Test OAuth
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test
+            client-secret: test
+            scope: profile, email
+
+
