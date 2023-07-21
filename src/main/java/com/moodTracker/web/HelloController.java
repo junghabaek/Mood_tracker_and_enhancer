@@ -10,6 +10,7 @@ import com.moodTracker.web.dto.TaskResponseDto;
 import com.moodTracker.web.vo.Mood_vo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -34,22 +33,39 @@ public class HelloController {
     private final UserRepository userRepository;
 
     @GetMapping("/")
-    public String hello(Model model){
+    public String hello(){
 
+        return "index.html";
+    }
+
+//    @GetMapping("/getSessionUser")
+//    public String getSessionUser(){
+//        String sessionUser = (String) httpSession.getAttribute("user");
+//        return sessionUser;
+////        return "{\"sessionUser\": \"" + sessionUser + "\"}";
+//    }
+    @GetMapping("/getSessionUser")
+    public ResponseEntity<Map<String, String>> getSessionUser() {
         SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
 
-        if(sessionUser != null){
-            model.addAttribute("userName", sessionUser.getName());
-        }
+        Map<String, String> response = new HashMap<>();
 
-        return "index";
+        if (sessionUser==null){
+            response.put("sessionUser", null);
+        } else {
+            response.put("sessionUser", sessionUser.getName());
+        }
+        return ResponseEntity.ok(response);
     }
+
+
 
     @GetMapping("/v1/mood_tracker")
     public String moodtracker (Model model){
 
         Long user_id = (Long) httpSession.getAttribute("user_id");
 
+        System.out.println(user_id);
 
         if (user_id==null){
             model.addAttribute("pastWeekLevel", -1);
@@ -76,7 +92,7 @@ public class HelloController {
 
         List<TaskResponseDto> taskResponseDtoList = taskService.findByUsers(users);
 
-        model.addAttribute(taskResponseDtoList);
+        model.addAttribute("taskResponseDtoList", taskResponseDtoList);
 
         return "task_manager";
     }

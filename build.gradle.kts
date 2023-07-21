@@ -14,8 +14,8 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.projectlombok:lombok")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.projectlombok:lombok:1.18.26")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     implementation("org.springframework.boot:spring-boot-starter-mustache")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
@@ -23,6 +23,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.hamcrest:hamcrest-library:2.2")
     testImplementation("org.springframework.security:spring-security-test")
+    implementation("org.projectlombok:lombok")
 }
 
 tasks.withType<Test> {

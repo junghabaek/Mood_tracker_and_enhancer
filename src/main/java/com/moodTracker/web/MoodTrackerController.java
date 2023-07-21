@@ -14,9 +14,7 @@ import lombok.RequiredArgsConstructor;
 import net.bytebuddy.asm.Advice;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
@@ -33,10 +31,9 @@ public class MoodTrackerController {
     private final FinishedTasksService finishedTasksService;
     private final HttpSession httpSession;
 
-///v1/selected_level_resolver
+    ///v1/selected_level_resolver
     @GetMapping("/v1/selected_level_resolver")
-    public String selected_level(@RequestParam("selected_level") String selected_level, Model model){
-//        System.out.println(selected_level);
+    public String selected_level(@RequestParam("selected_level") String selected_level, Model model) {
 
         model.addAttribute("selected_level", selected_level);
 //        List<Integer> level = new ArrayList<>();
@@ -45,7 +42,7 @@ public class MoodTrackerController {
 
         List<String> taskListString;
 
-        for (Task task : taskList){
+        for (Task task : taskList) {
             System.out.println(task.getTask_name());
 
         }
@@ -54,12 +51,14 @@ public class MoodTrackerController {
         return "level_selected";
     }
 
+
     @GetMapping("/v1/selected_tasks_resolver")
     public String level_selected(@RequestParam("task_list") String tasks,
-                                       @RequestParam("selected_level") int selected_level, Model model){
+                                          @RequestParam("selected_level") int selected_level, Model model) {
+
 
         Long user_id = (Long) httpSession.getAttribute("user_id");
-        Users user = userRepository.findById(user_id).orElseThrow(()->new IllegalArgumentException("해당 id를 가진 유저가 없습니다"));
+        Users user = userRepository.findById(user_id).orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 유저가 없습니다"));
         System.out.println(tasks);
 
 
@@ -67,14 +66,14 @@ public class MoodTrackerController {
 
 
         if (tasks.equals("[]")) {
-            if (selected_level<3) {
+            if (selected_level < 3) {
                 Mood mood = new Mood(user, selected_level);
                 moodRepository.save(mood);
                 model.addAttribute("userName", user.getName());
-                return "index";
+                return "indexx";
             }
 
-        }else {
+        } else {
             tasks = tasks.substring(1, tasks.length() - 1);
 
             String[] elements = tasks.split("\",\"");
@@ -94,12 +93,12 @@ public class MoodTrackerController {
 
             // 어떤 레벨에서 태스크를 두개 실행했거나, 레벨이 1일때 2개 이하로 실행했거나,
             // 레벨이 6일때 2개 이상 실행했으면 무드레벨이 정해짐.
-            if (taskList.size()==2 || (selected_level==1 && taskList.size()<2)
-                    || (selected_level==6 && taskList.size()>2)){
+            if (taskList.size() == 2 || (selected_level == 1 && taskList.size() < 2)
+                    || (selected_level == 6 && taskList.size() > 2)) {
                 Mood mood = new Mood(user, selected_level);
                 moodRepository.save(mood);
                 model.addAttribute("userName", user.getName());
-                return "index";
+                return "indexx";
             }
 
         }
@@ -129,25 +128,27 @@ public class MoodTrackerController {
 //
 //
         return "level_selected";
-
+//
+//        return "index.html";
     }
 
 
+    public int returnSelectedLevel(int numberOfSelection, int currentLevel) {
+        int nextLevel = (numberOfSelection - 2) + currentLevel;
 
-
-    public int returnSelectedLevel(int numberOfSelection, int currentLevel){
-        int nextLevel = (numberOfSelection-2)+currentLevel;
-
-        if (nextLevel<1){
-            nextLevel=1;
-        }else if(nextLevel>6){
-            nextLevel=6;
+        if (nextLevel < 1) {
+            nextLevel = 1;
+        } else if (nextLevel > 6) {
+            nextLevel = 6;
         }
 
         return nextLevel;
 
     }
-
-
-
 }
+
+
+//    @PostMapping("/v1/selected_tasks_resolver")
+//    public String level_selected(@RequestBody )
+//
+//}

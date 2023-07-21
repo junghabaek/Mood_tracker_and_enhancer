@@ -42,10 +42,11 @@ class HelloControllerTest {
 //    private WebApplicationContext context;
 
 //    @Mock
-    private HttpSession httpSession;
+//    private HttpSession httpSession;
 
-    @MockBean
-    private CustomOAuth2UserService customOAuth2UserService;
+    //아래의 목빈도 더이상 필요없다. 왜냐면 @SpringBootTest로 받아왔기 때문
+//    @MockBean
+//    private CustomOAuth2UserService customOAuth2UserService;
 
 //    @Autowired
 //    private CustomOAuth2UserService customOAuth2UserService;
@@ -68,11 +69,6 @@ class HelloControllerTest {
 //                .webAppContextSetup(context)
 //                .apply(springSecurity())
 //                .build();
-//    }
-
-    //아래는 session에다가 값을 넣어주기 위한 코드입니다.
-//    @BeforeEach
-//    public void setup(){
 //    }
 
 

@@ -8,6 +8,8 @@ spring:
   profiles:
     include: oauth, db
 
+  resources:
+    static-locations: classpath:/static/
 #h2 database
 #  h2:
 #    console:
