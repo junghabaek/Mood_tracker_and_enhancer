@@ -62,4 +62,10 @@
     2. A number of tasks will show up.
     3. check and do as many tasks as you like.
     4. if you reach the lowest level, highest leve or finish exactly two tasks, your mood will be tracked for the day.
+4. Mood history
+    1. using the calendar, pick two dates where you want to search the past mood level.
+    2. past mood level will show up.
+5. Task manager
+    1. users can create tasks which will be added to the level they selected.
+    2. users can click on each task they made to modify (update or delete) it.
 
