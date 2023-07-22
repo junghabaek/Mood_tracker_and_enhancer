@@ -1,4 +1,4 @@
-# Mood_tracker_and_enhancer (Spring boot)
+# Mood_tracker_and_enhancer (Spring boot 2.7.10)
 # Project Description
 
 ## Objectives:
@@ -40,7 +40,26 @@
     implementation("org.projectlombok:lombok:1.18.26")
     annotationProcessor("org.projectlombok:lombok")
 
+
     // Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.hamcrest:hamcrest-library:2.2")
     testImplementation("org.springframework.security:spring-security-test")
+
+## Installation:
+1. Java 11 is required
+2. Install Gradle [https://gradle.org/](https://gradle.org/)
+3. navigate to the root directory of the project
+4. enter gradle build
+5. enter Java 'filename (ends with .jar)'
+6. use web browser and navigate to localhost:8080/
+
+# How to use:
+1. users must be signed up with google or naver to use this app.
+2. There are three functions: mood tracker, mood history, and task manager.
+3. Mood tracker
+1. First pick a current mood level.
+2. A number of tasks will show up.
+3. check and do as many tasks as you like.
+4. if you reach the lowest level, highest leve or finish exactly two tasks, your mood will be tracked for the day.
+
