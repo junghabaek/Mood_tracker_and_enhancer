@@ -58,8 +58,8 @@
 1. users must be signed up with google or naver to use this app.
 2. There are three functions: mood tracker, mood history, and task manager.
 3. Mood tracker
-1. First pick a current mood level.
-2. A number of tasks will show up.
-3. check and do as many tasks as you like.
-4. if you reach the lowest level, highest leve or finish exactly two tasks, your mood will be tracked for the day.
+    1. First pick a current mood level.
+    2. A number of tasks will show up.
+    3. check and do as many tasks as you like.
+    4. if you reach the lowest level, highest leve or finish exactly two tasks, your mood will be tracked for the day.
 
